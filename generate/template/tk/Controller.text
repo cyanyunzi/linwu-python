@@ -1,0 +1,54 @@
+import lombok.Data;
+
+import com.homedo.common.dao.bean.po.base.BasePo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+% for imp in otherImport:
+import ${imp};
+% endfor
+
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}控制器
+ */
+@Api(tags = "${table.comment}")
+@RestController
+@RequestMapping("/${table.name}")
+public class ${class_name}{
+    @Autowired private ${table.className}Service ${table.className.lower()}Service;
+
+    @ApiOperation("${table.comment}分页")
+    @GetMapping("")
+    public ResponseData<BasePageListResp<${table.className}PageResp>> page(${table.className}PageReq req){
+        ${table.className.lower()}Service.select${table.className}Page(req);
+        return ResponseUtils.success();
+    }
+
+    @ApiOperation("${table.comment}新增")
+    @PostMapping("")
+    public ResponseData add(@Validated @RequestBody ${table.className}Req req){
+        ${table.className.lower()}Service.add${table.className}(id);
+        return ResponseUtils.success();
+    }
+
+    @ApiOperation("${table.comment}修改")
+    @PutMapping("/{id}")
+    public ResponseData update(@PathVariable Long id,@Validated @RequestBody ${table.className}Req req){
+        ${table.className.lower()}Service.update${table.className}(id);
+        return ResponseUtils.success();
+    }
+
+    @ApiOperation("${table.comment}详情")
+    @PostMapping("/{id}")
+    public ResponseData<${table.className}Resp> detail(@PathVariable Long id){
+        ${table.className}Resp result = ${table.className.lower()}Service.select${table.className}(id);
+        return ResponseUtils.success(result);
+    }
+
+
+}

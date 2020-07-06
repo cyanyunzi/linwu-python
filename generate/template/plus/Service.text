@@ -1,0 +1,16 @@
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}基础service
+ */
+@Service
+public class ${table.className}Service extends BaseService<${table.className}>{
+    @Autowired
+    private ${table.className}Dao ${table.className}Dao;
+}

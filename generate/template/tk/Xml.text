@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${package['MAPPER']}.I${table.className}Mapper">
+    <resultMap id="BaseResultMap" type="${package['ENTITY']}.${table.className}">
+        % for field in table.fields:
+            <id column="${field.name}" property="${field.javaName}"/>
+        % endfor
+    </resultMap>
+</mapper>

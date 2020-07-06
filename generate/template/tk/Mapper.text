@@ -1,0 +1,16 @@
+import org.springframework.stereotype.Repository;
+import com.homedo.common.dao._mapper.support._mapper.MyMapper;
+
+
+
+% for imp in otherImport:
+import ${imp};
+% endfor
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}基础Mapper
+ */
+@Repository
+public interface I${class_name} extends MyMapper<${table.className}>{
+}

@@ -1,0 +1,17 @@
+import com.homedo.common.service.BaseService;
+import com.homedo.microservice.tools.wx.api.persistence.dao.${table.className}Dao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+% for imp in otherImport:
+import ${imp};
+% endfor
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}基础service
+ */
+@Service
+public class ${class_name} extends BaseService<${table.className}>{
+    @Autowired
+    private ${table.className}Dao ${table.className.lower()}Dao;
+}

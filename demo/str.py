@@ -12,3 +12,9 @@ print(str2)
 
 
 print('替换 %s' % '字符串')
+a = 1
+
+result = a is 1
+print(result)
+
+

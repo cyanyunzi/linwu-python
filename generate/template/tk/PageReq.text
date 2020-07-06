@@ -1,0 +1,34 @@
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+% for imp in otherImport:
+import ${imp};
+% endfor
+
+% for imp in table.imports:
+import ${imp};
+% endfor
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}前端分页请求对象
+ */
+@ApiModel
+@Getter
+@Setter
+@ToString(callSuper = true)
+public class ${class_name} extends BasePageReq{
+    % for field in table.fields:
+        @ApiModelProperty("${field.comment}")
+        % if field.javaType.find('LocalDateTime')!=-1:
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        % endif
+        ${field.valid}
+        private ${field.javaType} ${field.javaName};
+
+    % endfor
+}

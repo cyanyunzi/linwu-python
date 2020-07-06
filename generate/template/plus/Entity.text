@@ -1,0 +1,21 @@
+import lombok.Data;
+% for imp in table.imports:
+import ${imp};
+% endfor
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}实体类
+ */
+@Data
+public class ${table.className} extends BaseEntity{
+    % for field in table.fields:
+        /**${field.comment}*/
+        private ${field.javaType} ${field.javaName};
+    % endfor
+
+
+    % for field in table.fields:
+        public static final ${field.culumn_constant} = ${field.name}
+    % endfor
+}

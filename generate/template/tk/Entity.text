@@ -1,0 +1,44 @@
+import lombok.Data;
+
+import com.homedo.common.dao.bean.po.base.BasePo;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
+
+% for imp in otherImport:
+import ${imp};
+% endfor
+
+% for imp in table.imports:
+import ${imp};
+% endfor
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}实体类
+ */
+@Data
+public class ${class_name} extends BasePo{
+% for field in table.fields:
+    /**${field.comment}*/
+    % if field.isPri:
+    @Id
+    @GeneratedValue(generator = "JDBC")
+    @Column(name = "${field.name}")
+    % else:
+    @Column(name = "${field.name}")
+    % endif
+    private ${field.javaType} ${field.javaName};
+% endfor
+/**实体类字段常量*/
+% for field in table.fields:
+    public static final String ${field.culumn_constant} = "${field.name}";
+% endfor
+
+/**数据库字段常量*/
+% for field in table.fields:
+    public static final String ${field.field_constant} = "${field.javaName}";
+% endfor
+}

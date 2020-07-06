@@ -1,0 +1,29 @@
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import com.homedo.microservice.tools.wx.api.bean.resp.base.BaseResp;
+% for imp in table.imports:
+import ${imp};
+% endfor
+
+/**
+ * @author ：林雾
+ * @description :${table.comment}前端渲染对象
+ */
+@ApiModel
+@Getter
+@Setter
+@ToString(callSuper = true)
+public class ${class_name} extends BaseResp{
+    % for field in table.fields:
+    @ApiModelProperty("${field.comment}")
+    % if field.javaType.find('LocalDateTime')!=-1:
+    @JsonFormat(timezone = "GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    % endif
+    private ${field.javaType} ${field.javaName};
+
+    % endfor
+}
